@@ -1,0 +1,113 @@
+{
+ "full": "inkcat/tide",
+ "url": "https://github.com/inkcat/tide",
+ "description": "A tiny streaming parser.",
+ "stars": 1234,
+ "forks": 56,
+ "language": "Rust",
+ "created": "2024-01-10T09:00:00Z",
+ "totalCommits": 163,
+ "recent": [
+  {
+   "sha": "a1",
+   "message": "Ship the docs site",
+   "date": "2026-10-10T10:00:00Z",
+   "login": "ana",
+   "name": "Ana",
+   "avatar": "https://avatars.githubusercontent.com/u/6825?v=4"
+  },
+  {
+   "sha": "a2",
+   "message": "Revert \"Speed up the parser\"",
+   "date": "2026-10-02T10:00:00Z",
+   "login": "bo",
+   "name": "Bo",
+   "avatar": "https://avatars.githubusercontent.com/u/7421?v=4"
+  },
+  {
+   "sha": "a3",
+   "message": "Fix flaky test",
+   "date": "2026-09-29T10:00:00Z",
+   "login": "ana",
+   "name": "Ana",
+   "avatar": "https://avatars.githubusercontent.com/u/6825?v=4"
+  },
+  {
+   "sha": "a4",
+   "message": "Speed up the parser",
+   "date": "2026-09-29T10:00:00Z",
+   "login": "bo",
+   "name": "Bo",
+   "avatar": "https://avatars.githubusercontent.com/u/7421?v=4"
+  },
+  {
+   "sha": "a5",
+   "message": "Tune parser buffers",
+   "date": "2026-09-29T10:00:00Z",
+   "login": "ana",
+   "name": "Ana",
+   "avatar": "https://avatars.githubusercontent.com/u/6825?v=4"
+  },
+  {
+   "sha": "a6",
+   "message": "Add streaming parser",
+   "date": "2026-09-29T10:00:00Z",
+   "login": "ana",
+   "name": "Ana",
+   "avatar": "https://avatars.githubusercontent.com/u/6825?v=4"
+  },
+  {
+   "sha": "a7",
+   "message": "Update dependencies",
+   "date": "2026-09-20T10:00:00Z",
+   "login": "cy",
+   "name": "Cy",
+   "avatar": "https://avatars.githubusercontent.com/u/5730?v=4"
+  },
+  {
+   "sha": "a8",
+   "message": "Write the tutorial",
+   "date": "2026-09-12T10:00:00Z",
+   "login": "ana",
+   "name": "Ana",
+   "avatar": "https://avatars.githubusercontent.com/u/6825?v=4"
+  }
+ ],
+ "first": {
+  "sha": "a0",
+  "message": "Initial commit",
+  "date": "2024-01-10T10:00:00Z",
+  "login": "ana",
+  "name": "Ana",
+  "avatar": "https://avatars.githubusercontent.com/u/6825?v=4"
+ },
+ "contributors": [
+  {
+   "login": "ana",
+   "avatar": "https://avatars.githubusercontent.com/u/6825?v=4",
+   "commits": 120
+  },
+  {
+   "login": "bo",
+   "avatar": "https://avatars.githubusercontent.com/u/7421?v=4",
+   "commits": 40
+  },
+  {
+   "login": "cy",
+   "avatar": "https://avatars.githubusercontent.com/u/5730?v=4",
+   "commits": 3
+  }
+ ],
+ "releases": [
+  {
+   "tag": "v2.0.0",
+   "name": "Tide 2",
+   "date": "2026-10-01T00:00:00Z"
+  },
+  {
+   "tag": "v1.0.0",
+   "name": "v1.0.0",
+   "date": "2025-04-01T00:00:00Z"
+  }
+ ]
+}

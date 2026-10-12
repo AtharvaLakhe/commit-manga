@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Commit Manga</title>
+<meta name="description" content="Paste any GitHub repository and get its history drawn as a black-and-white manga page: the founder, the crew, the busiest day, the drama, the release and the cliffhanger.">
+<meta property="og:title" content="Commit Manga: your repo's history, drawn as a manga page">
+<meta property="og:description" content="The founder, the crew, the busiest day, the drama, the release and the cliffhanger. Paste a repo, get a page.">
+<meta property="og:image" content="https://atharvalakhe.github.io/commit-manga/assets/social.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22%3E%3Crect width=%2232%22 height=%2232%22 fill=%22%23fbfaf6%22/%3E%3Cpath d=%22M3 3h12v14H3zM17 3h12v9H17zM17 14h12v15H17zM3 19h12v10H3z%22 fill=%22none%22 stroke=%22%230b0b0b%22 stroke-width=%222%22/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bangers&family=Comic+Neue:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&text=%E3%83%89%E3%82%AC%E3%83%BC%E3%83%B3%E3%82%AE%E3%82%AF%E3%83%83%E3%82%AD%E3%83%A9%E3%82%BF%E3%83%A9%E3%82%BA%E3%83%BC%E3%83%B3%E3%82%B4%E3%83%B3%E3%83%89%E3%82%AD%E3%83%89%E3%82%AD%E3%82%B3%E3%83%9F%E3%83%83%E3%83%88%E6%BC%AB%E7%94%BB&display=swap" rel="stylesheet">
+<style>
+  :root { --bg: #0b0b0b; --paper: #fbfaf6; --ink: #0b0b0b; --muted: #8f8b82; --line: #2a2a2a; }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--paper); font: 700 17px/1.5 "Comic Neue", "Comic Sans MS", sans-serif; }
+  a { color: var(--paper); }
+  .wrap { max-width: 1120px; margin: 0 auto; padding: 0 20px; }
+  header { display: grid; grid-template-columns: 1fr auto; align-items: end; gap: 20px; padding: 54px 0 26px; }
+  h1 { font: 400 clamp(56px, 10vw, 112px)/.86 Bangers, Impact, sans-serif; letter-spacing: .02em; margin: 0; }
+  .jp { font: 400 64px/1 "Dela Gothic One", sans-serif; writing-mode: vertical-rl; color: var(--paper); -webkit-text-stroke: 1px var(--paper); user-select: none; }
+  .sub { color: var(--muted); max-width: 56ch; margin: 14px 0 0; font-size: 19px; }
+  form { display: flex; gap: 10px; margin: 26px 0 12px; flex-wrap: wrap; }
+  #repo { flex: 1 1 320px; font: 700 20px "Comic Neue", sans-serif; padding: 14px 16px; background: var(--paper); color: var(--ink); border: 3px solid var(--paper); outline: none; }
+  #repo:focus-visible { border-color: #fff; box-shadow: 0 0 0 3px #555; }
+  button, .btn { font: 400 22px/1 Bangers, Impact, sans-serif; letter-spacing: .06em; padding: 14px 22px; background: var(--bg); color: var(--paper); border: 3px solid var(--paper); cursor: pointer; text-decoration: none; transition: transform .08s; }
+  button:hover, .btn:hover { transform: translate(-2px, -2px); box-shadow: 4px 4px 0 var(--paper); }
+  button:disabled { opacity: .5; cursor: wait; transform: none; box-shadow: none; }
+  button.primary { background: var(--paper); color: var(--ink); }
+  button:focus-visible, .btn:focus-visible, .chip:focus-visible, summary:focus-visible { outline: 3px solid #fff; outline-offset: 3px; }
+  .chips { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; color: var(--muted); font-size: 15px; }
+  .chip { font: 700 15px "Comic Neue", sans-serif; background: transparent; color: var(--paper); border: 2px solid var(--line); padding: 6px 12px; letter-spacing: 0; }
+  .chip:hover { border-color: var(--paper); box-shadow: none; transform: none; }
+  details { margin: 14px 0 0; color: var(--muted); font-size: 15px; }
+  details input { font: 15px ui-monospace, monospace; padding: 8px 10px; width: min(420px, 100%); background: #151515; color: var(--paper); border: 2px solid var(--line); margin-top: 8px; }
+  #status { min-height: 26px; margin: 18px 0 10px; color: var(--muted); }
+  #status.err { color: #ff8f8f; }
+  #status.ok { color: var(--paper); }
+  #stage { background: var(--paper); border: 3px solid var(--paper); box-shadow: 10px 10px 0 #222; max-width: 760px; margin: 0 auto; transition: opacity .2s; }
+  #stage.busy { opacity: .45; }
+  #stage svg { display: block; width: 100%; height: auto; }
+  .empty { aspect-ratio: 1000 / 1500; display: grid; place-items: center; color: var(--ink); text-align: center; padding: 30px;
+           background: repeating-linear-gradient(45deg, transparent 0 9px, rgba(0,0,0,.06) 9px 10px); }
+  .empty b { font: 400 44px/1.05 Bangers, Impact, sans-serif; display: block; margin-bottom: 10px; letter-spacing: .03em; }
+  .empty span { color: #555; }
+  #actions { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin: 26px 0 0; }
+  section.how { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; background: var(--line); border: 2px solid var(--line); margin: 70px 0 0; }
+  section.how div { background: var(--bg); padding: 20px; }
+  section.how h3 { font: 400 28px/1 Bangers, Impact, sans-serif; letter-spacing: .04em; margin: 0 0 8px; }
+  section.how p { margin: 0; color: var(--muted); font-size: 16px; }
+  footer { color: var(--muted); text-align: center; padding: 50px 0 60px; font-size: 15px; }
+  @media (max-width: 760px) {
+    header { grid-template-columns: 1fr; padding-top: 34px; }
+    .jp { display: none; }
+    section.how { grid-template-columns: 1fr; }
+    #stage { box-shadow: 6px 6px 0 #222; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div>
+      <h1>COMMIT<br>MANGA</h1>
+      <p class="sub">Paste any public GitHub repository. Its history comes back as one manga page: the founder, the crew, the busiest day, the drama, the release and the cliffhanger.</p>
+    </div>
+    <div class="jp" aria-hidden="true">コミット漫画</div>
+  </header>
+
+  <form id="form" autocomplete="off">
+    <input id="repo" name="repo" placeholder="owner/name or a GitHub link" aria-label="Repository" spellcheck="false">
+    <button class="primary" type="submit">Draw it</button>
+  </form>
+  <div class="chips">Try:
+    <button class="chip" type="button" data-repo="facebook/react">facebook/react</button>
+    <button class="chip" type="button" data-repo="torvalds/linux">torvalds/linux</button>
+    <button class="chip" type="button" data-repo="vercel/next.js">vercel/next.js</button>
+    <button class="chip" type="button" data-repo="rust-lang/rust">rust-lang/rust</button>
+    <button class="chip" type="button" data-repo="microsoft/vscode">microsoft/vscode</button>
+    <button class="chip" type="button" data-repo="AtharvaLakhe/inkgraph">AtharvaLakhe/inkgraph</button>
+  </div>
+  <details>
+    <summary>Drawing a lot of pages? Add a token</summary>
+    GitHub lets each visitor make 60 requests an hour without one, about ten pages. A token with no scopes raises that to 5,000. It stays in this browser and is only sent to api.github.com.
+    <br><input id="token" type="password" placeholder="ghp_… or github_pat_…" aria-label="GitHub token">
+  </details>
+
+  <p id="status" role="status" aria-live="polite"></p>
+  <div id="stage">
+    <div class="empty"><div><b>Your repo's story<br>goes here.</b><span>Seven panels, drawn from real commits. Pick a repository above.</span></div></div>
+  </div>
+  <div id="actions" hidden>
+    <button id="png" type="button">Download PNG</button>
+    <button id="svg" type="button">Download SVG</button>
+    <button id="link" type="button">Copy link</button>
+  </div>
+
+  <section class="how">
+    <div><h3>Real history</h3><p>About six requests to the GitHub API, straight from your browser. No server, no sign-in, nothing stored.</p></div>
+    <div><h3>Ink portraits</h3><p>Every contributor's avatar is turned into a manga portrait: solid ink in the shadows, screentone dots in the mid-tones.</p></div>
+    <div><h3>A story beat per panel</h3><p>The first commit, the people, the day the commits piled up, the most dramatic message, the latest release, and what happens next.</p></div>
+  </section>
+  <footer>Made by <a href="https://github.com/AtharvaLakhe">Atharva Lakhe</a>. Open source on <a href="https://github.com/AtharvaLakhe/commit-manga">GitHub</a>. You might also like <a href="https://atharvalakhe.github.io/inkgraph/">inkgraph</a>.</footer>
+</div>
+<script type="module" src="src/app.js"></script>
+</body>
+</html>

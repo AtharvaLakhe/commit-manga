@@ -1,0 +1,12 @@
+{
+  "name": "commit-manga",
+  "version": "1.0.0",
+  "description": "Any GitHub repository's history, drawn as a black-and-white manga page.",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "test": "node --test"
+  },
+  "license": "MIT",
+  "author": "Atharva Lakhe"
+}
